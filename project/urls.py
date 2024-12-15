@@ -19,6 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+handler400 = 'project.views.handler400'
+handler403 = 'project.views.handler403'
+handler404 = 'project.views.handler404'
+handler500 = 'project.views.handler500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace="main")),
