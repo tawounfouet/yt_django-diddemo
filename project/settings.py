@@ -25,8 +25,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-og)+bp*1tvrqb(abb=m1@k&h6s6g-9x+9h&xd!ci330yn(w5l='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
-DEBUG = False
+DEBUG = True
+#DEBUG = False
+COMING_SOON = False
+if COMING_SOON:
+    MAINTENANCE_MODE_TEMPLATE = "coming_soon.html"
+else:
+ MAINTENANCE_MODE_TEMPLATE = "503.html"
+
+
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
@@ -41,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+
+    'maintenance_mode',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +60,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # maintenance mode middleware (must be at the end)
+    "maintenance_mode.middleware.MaintenanceModeMiddleware"
 ]
 
 ROOT_URLCONF = 'project.urls'
@@ -68,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                 "maintenance_mode.context_processors.maintenance_mode", # maintenance mode context
             ],
         },
     },
@@ -135,3 +148,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media_cdn")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# if True the maintenance-mode will be activated
+MAINTENANCE_MODE = None

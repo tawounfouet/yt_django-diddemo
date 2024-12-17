@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="bgimg" style="background-image: url({% static 'default.jpeg' %})">
+    <div class="topleft">
+        <img src="{% static 'branding/logo.png' %}" alt="" style="width: 150px">
+
+    </div>
+
+    <div class="middle">
+        
+        <h1>Our Website is nearly build. Please come back soon!</h1>
+
+        <hr>
+    </div>
+</div>    
+
+{% endblock %}

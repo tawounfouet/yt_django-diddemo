@@ -16,3 +16,7 @@ def handler404(request, exception):
 
 def handler500(request):
     return render(request, "500.html", status=500)
+
+
+def handler503(request):
+    return render(request, "503.html", status=503)
